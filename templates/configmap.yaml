@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "krakend.fullname" . }}-configmap
+data:
+  krakend.json: |-
+{{ .Files.Get "krakend.json" | indent 4 }}
