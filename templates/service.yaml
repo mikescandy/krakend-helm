@@ -3,10 +3,7 @@ kind: Service
 metadata:
   name: {{ include "krakend.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ include "krakend.name" . }}
-    helm.sh/chart: {{ include "krakend.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    {{- include "krakend.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -15,5 +12,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app.kubernetes.io/name: {{ include "krakend.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    {{- include "krakend.selectorLabels" . | nindent 4 }}
