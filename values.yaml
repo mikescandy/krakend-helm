@@ -79,3 +79,23 @@ tolerations: []
 affinity: {}
 
 krakendJson: ""
+
+probes:
+  liveness:
+    enabled: true
+    probe:
+      httpGet:
+        path: /
+        port: http
+  readiness:
+    enabled: true
+    probe:
+      httpGet:
+        path: /
+        port: http
+  startup:
+    enabled: false
+    probe:
+      httpGet:
+        path: /
+        port: http
