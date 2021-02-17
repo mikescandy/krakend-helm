@@ -44,14 +44,18 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
+          {{- if .Values.probes.liveness.enabled }}
           livenessProbe:
-            httpGet:
-              path: /
-              port: http
+            {{- toYaml .Values.probes.liveness.probe | nindent 12 }}
+          {{- end }}
+          {{- if .Values.probes.readiness.enabled }}
           readinessProbe:
-            httpGet:
-              path: /
-              port: http
+            {{- toYaml .Values.probes.readiness.probe | nindent 12 }}
+          {{- end }}
+          {{- if .Values.probes.startup.enabled }}
+          startupProbe:
+            {{- toYaml .Values.probes.startup.probe | nindent 12 }}
+          {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
