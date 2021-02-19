@@ -8,4 +8,4 @@ data:
 {{ .Files.Get "krakend.json" | indent 4 }}
 {{- else }}
 {{ .Values.krakendJson | indent 4 }}
-{{- end}}
+{{- end }}

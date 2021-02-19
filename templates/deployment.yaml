@@ -24,6 +24,9 @@ spec:
         - name: config
           configMap:
             name: {{ template "krakend.fullname" . }}-configmap
+        {{- if .Values.addlVolumes }}
+        {{- toYaml .Values.addlVolumes | nindent 8 }}
+        {{- end }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -40,6 +43,13 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /etc/krakend/
+            {{- if .Values.addlVolumeMounts }}
+            {{- toYaml .Values.addlVolumeMounts | nindent 12 }}
+            {{- end }}
+          env:
+            {{- if .Values.env }}
+            {{- toYaml .Values.env | nindent 12 }}
+            {{- end }}
           ports:
             - name: http
               containerPort: 8080
