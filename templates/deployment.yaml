@@ -44,13 +44,16 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
+          env:
+            - name: KRAKEND_PORT
+              value: "8080"
           livenessProbe:
             httpGet:
-              path: /
+              path: /__health
               port: http
           readinessProbe:
             httpGet:
-              path: /
+              path: /__health
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
