@@ -80,3 +80,6 @@ tolerations: []
 affinity: {}
 
 krakendJson: ""
+addlVolumes: []
+addlVolumeMounts: []
+env: []
