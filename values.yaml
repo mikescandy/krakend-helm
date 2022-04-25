@@ -72,6 +72,16 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
+livenessProbe:
+  enabled: true
+  path: /__health
+  port: http
+
+readinessProbe:
+  enabled: true
+  path: /__health
+  port: http
+
 nodeSelector: {}
 
 tolerations: []
